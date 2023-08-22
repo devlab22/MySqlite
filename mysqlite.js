@@ -1,24 +1,49 @@
 
 const Database = require('better-sqlite3');
 
-class MySqlite{
+class MySqlite {
 
-    constructor(path){
+    constructor(path) {
         this.masterData = [];
-        this.db = new Database(path, {verbose: console.log});
+        this.db = new Database(path);
     }
 
-    execute(command){
+    readTable(name) {
 
-        //this.db.prepare(command);
-        this.db.exec(command)
+        var output = []
+        const stmt = this.db.prepare(`SELECT * FROM ${name}`);
+
+        for (const record of stmt.iterate()) {
+            output.push(record)
+        }
+
+        return output;
+
     }
 
-    readTable(name){
+    execute(statment){
+        this.db.exec(statment)
+    }
 
-        const values = this.db.exec(`SELECT * FROM ${name}`);
-        console.log(values)
+    statmentRecord(statment, record){
+     
+        console.log(statment)
+        console.log(record)
+
+        //return
+        const stmt = this.db.prepare(statment)
+
+        try {
+            const RunResult = stmt.run( // synchronous
+              record
+            );
         
+            console.log(RunResult)
+          } catch (e) {
+            const isDuplicate = e.toString().includes('UNIQUE constraint failed');
+            throw new Error(e.message)
+          }
+
     }
 }
 
