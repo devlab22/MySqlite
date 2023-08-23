@@ -44,17 +44,18 @@ function prepare() {
     }
 
   })
-  
+
 }
 
 function getUser(user) {
 
   const db = new MySqlite('mydatabase.db')
-  const statment = `select * from users where uname = ?`
+  const statment = `select * from users where uname = (?)`
 
   try {
     const output = db.selectRecord(statment, user)
-    console.log(output)
+    const params = JSON.parse(output['params'])
+    console.log(output.uname, params)
   } catch (e) {
     console.log(e.message)
   }
@@ -67,7 +68,7 @@ function main() {
   //addRecord()
   //prepare()
   getUser('vengelhard')
-  getUser('mbraun2')
+  getUser('mbraun')
 
 }
 
