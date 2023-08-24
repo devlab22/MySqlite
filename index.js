@@ -1,8 +1,12 @@
 const mySqlite = require('./mysqlite')
+const myLogger = require('./mylogger')
 
+function getLogger(){
+  return new myLogger().getLogger();
+}
 
 function createDB() {
-  return new mySqlite('mydatabase.db')
+  return new mySqlite('mydatabase.db');
 }
 
 function createTable() {
@@ -129,6 +133,7 @@ function addCustomizing(key, content) {
 
 function main() {
 
+  const logger = getLogger()
  // createTable()
 
   const tableName = 'customizing'
@@ -143,7 +148,9 @@ function main() {
 
   //readTable(tableName)
   //addRecord(user, params)
+  logger.info('read Database', 'test')
   readDB()
+  //logger.error('error by insert')
   // getUser(user)
   // updateRecord(user, params)
   // deleteRecord(user)
