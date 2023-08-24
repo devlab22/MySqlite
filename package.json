@@ -2,14 +2,20 @@
   "name": "mysqlite",
   "version": "1.0.0",
   "description": "Sqlite Database",
+  "bin": "index.js",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "pkg ."
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "better-sqlite3": "^8.5.1"
+    "better-sqlite3": "^8.5.1",
+    "pkg": "^5.8.1"
+  },
+  "pkg":{
+    "scripts": "mysqlite.js"
   }
 }

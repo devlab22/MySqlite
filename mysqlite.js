@@ -59,12 +59,15 @@ class MySqlite {
 
     execute(statment) {
         const conn = this.getConnection();
-        conn.exec(statment)
+        //conn.exec(statment)
+        const stmt = conn.prepare(statment)
+        const result = stmt.run()
         conn.close();
+        return result;
     }
 
     selectRecord(statment, ...args) {
-
+   // select
         const conn = this.getConnection();
         const stmt = conn.prepare(statment);
         const result = stmt.get( // synchronous
@@ -78,8 +81,9 @@ class MySqlite {
         return result;
 
     }
-    statmentRecord(statment, ...args) {
 
+    statmentRecord(statment, ...args) {
+  // insert, update, delete
         const conn = this.getConnection();
         const stmt = conn.prepare(statment)
 
