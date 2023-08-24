@@ -6,12 +6,21 @@ function createDB() {
 }
 
 function createTable() {
-  const db = createDB()
 
-  //const createtable = "CREATE TABLE IF NOT EXISTS users('uname' varchar PRIMARY KEY NOT NULL, 'params' varchar);"
-  const createtable = "create table if not exists customizing('key' varchar primary key not null, 'content' varchar)"
-  const result = db.execute(createtable)
-  console.log(result)
+  try {
+
+    const db = createDB()
+
+    var statment = "create table if not exists customizing('key' varchar primary key not null, 'content' varchar)"
+    db.execute(statment)
+    statment = "CREATE TABLE IF NOT EXISTS users('uname' varchar PRIMARY KEY NOT NULL, 'params' varchar);"
+    db.execute(statment)
+
+  }
+  catch (e) {
+    console.log(e.message)
+  }
+
 }
 
 function addUser(user, params) {
@@ -70,7 +79,7 @@ function readDB(fields = false) {
   const masterData = db.readMasterData();
   masterData.forEach(element => {
     if (element['type'] === 'table') {
-      
+
       if (fields) {
         db.printTableFields(element['name'])
       }
@@ -120,7 +129,7 @@ function addCustomizing(key, content) {
 
 function main() {
 
-  //createTable()
+ // createTable()
 
   const tableName = 'customizing'
   const user = 'vengelhard'
