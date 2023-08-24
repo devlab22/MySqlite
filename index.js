@@ -1,4 +1,3 @@
-const MySqlite = require('./mysqlite')
 const mySqlite = require('./mysqlite')
 
 
