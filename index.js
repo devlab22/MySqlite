@@ -1,12 +1,13 @@
-const mySqlite = require('./mysqlite')
-const myLogger = require('./mylogger')
+const MySqlite = require('./mysqlite');
+const MyLogger = require('./mylogger');
+
 
 function getLogger(){
-  return new myLogger().getLogger();
+  return new MyLogger().getLogger();
 }
 
 function createDB() {
-  return new mySqlite('mydatabase.db');
+  return new MySqlite('mydatabase.db');
 }
 
 function createTable() {
@@ -112,8 +113,35 @@ function getUser(user) {
 
 function addCustomizing(key, content) {
 
+  const logger = getLogger()
   const db = createDB();
   const statment = `insert into customizing (key, content) values (?, ?)`
+  var value = ''
+
+  if (typeof content === 'object') {
+    value = JSON.stringify(content)
+  }
+  else {
+    value = content
+  }
+
+  try {
+    db.statmentRecord(statment, key, value)
+    logger.info(`key: ${key}, value: ${value} was processed successfully`)
+  }
+  catch (e) {
+    console.log(e.message)
+    logger.error(`key: ${key}, value: ${value} was failed`)
+
+  }
+
+}
+
+function updateCustomizing(key, content){
+  const logger = getLogger()
+  const db = createDB();
+
+  const statment = `update customizing set content = ? where key = ?`
   var value = ''
 
   if (typeof content === 'object') {
@@ -123,17 +151,34 @@ function addCustomizing(key, content) {
   }
 
   try {
-    db.statmentRecord(statment, key, value)
+    db.statmentRecord(statment, value, key)
+    logger.info(`key: ${key}, value: ${value} was updatet successfully`)
   }
   catch (e) {
     console.log(e.message)
+    logger.error(`key: ${key}, value: ${value} was failed`)
+
+  }
+}
+
+function getCustomizing(key){
+  const logger = getLogger()
+  const db = createDB();
+  const statment = `select * from customizing where key = ?`
+
+  try {
+    const output = db.selectRecord(statment,key)
+    return output
+  }
+  catch (e) {
+    console.log(e.message)
+    logger.error(`key: ${key} is not found`)
+
   }
 
 }
 
 function main() {
-
-  const logger = getLogger()
  // createTable()
 
   const tableName = 'customizing'
@@ -142,17 +187,27 @@ function main() {
     "networkId": "L_12345"
   }
 
+  const key = 'networkId';
+  content = "[L_12345;L_98765]"
+  console.log(MySqlite.jsonToString(params))
+  const items = ['item1', 'item2', 'item3', 'item4']
+  console.log(MySqlite.arrayToString(items));
 
-  //addCustomizing('port', '8080')
 
+ // addCustomizing('networkId', 'L_9876543')
+  //updateCustomizing(key, content)
+  //const output = getCustomizing(key)
+  //const networks = MySqlite.convertToArray(output.content)
+  //networks.forEach( network => console.log(network))
+
+  
 
   //readTable(tableName)
   //addRecord(user, params)
-  logger.info('read Database', 'test')
-  readDB()
+ // readDB()
   //logger.error('error by insert')
   // getUser(user)
-  // updateRecord(user, params)
+  // updateUser(user, params)
   // deleteRecord(user)
 
 }

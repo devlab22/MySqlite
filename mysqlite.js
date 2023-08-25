@@ -58,7 +58,6 @@ class MySqlite {
 
     execute(statment) {
         const conn = this.getConnection();
-        //conn.exec(statment)
         const stmt = conn.prepare(statment)
         const result = stmt.run()
         conn.close();
@@ -92,7 +91,7 @@ class MySqlite {
                 ...args
             );
 
-            console.log(RunResult)
+            return RunResult
         } catch (e) {
             const isDuplicate = e.toString().includes('UNIQUE constraint failed');
             throw new Error(e.message)
@@ -101,6 +100,29 @@ class MySqlite {
         }
 
     }
+
+    static convertToJson(content){
+        return JSON.parse(content)
+    }
+
+    static convertToArray(content, separator=';'){
+        
+        content = content.replace('[', '')
+        content = content.replace(']', '')
+        const values = content.split(separator)
+        return values
+    }
+
+    static jsonToString(data){
+        return JSON.stringify(data)
+    }
+
+    static arrayToString(items, separator=';'){
+        var value = items.toString();
+        value = value.replace(',', separator);
+        return value;
+    }
+
 }
 
 module.exports = MySqlite
