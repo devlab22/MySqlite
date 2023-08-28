@@ -17,6 +17,6 @@
     "winston": "^3.10.0"
   },
   "pkg": {
-    "scripts": "mysqlite.js"
+    "scripts": "mysqlite.js, mylogger.js"
   }
 }
