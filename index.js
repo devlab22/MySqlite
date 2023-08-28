@@ -220,16 +220,16 @@ function main() {
  // deleteCustomizing('networkId')
 
   //addCustomizing('networks', 'L_9876543;L_123456')
-  updateCustomizing(key, content)
-  const output = getCustomizing(key)
-  const networks = MySqlite.convertToArray(output.content)
-  console.log(networks)
+  //updateCustomizing(key, content)
+  //const output = getCustomizing(key)
+  //const networks = MySqlite.convertToArray(output.content)
+  //console.log(networks)
 
   
 
   //readTable(tableName)
   //addRecord(user, params)
-  //readDB()
+  readDB(fields=true)
   //logger.error('error by insert')
   // getUser(user)
   // updateUser(user, params)

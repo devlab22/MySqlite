@@ -45,14 +45,14 @@ class MySqlite {
     printTable(name) {
 
         const output = this.readTable(name);
-        console.log(`content of table ${name}, count: ${output.length}`)
+        console.log(`content of table "${name}", count: ${output.length}`)
         output.forEach(line => console.log(line))
     }
 
     printTableFields(name) {
 
         const fields = this.readTableFields(name);
-        console.log(`Fields of table ${name}, count: ${fields.length}`)
+        console.log(`Fields of table "${name}", count: ${fields.length}`)
         fields.forEach(line => console.log(line))
     }
 
