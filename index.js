@@ -229,7 +229,7 @@ function main() {
 
   //readTable(tableName)
   //addRecord(user, params)
-  readDB(fields=true)
+  readDB()
   //logger.error('error by insert')
   // getUser(user)
   // updateUser(user, params)
