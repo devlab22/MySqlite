@@ -208,28 +208,28 @@ function getCustomizing(key){
 function main() {
  // createTable()
 
-  const tableName = 'customizing'
+  const tableName = 'users'
   const user = 'vengelhard'
   const params = {
     "networks": "L_12345"
   }
 
-  const key = 'networkId';
+  const key = 'networks';
   content = "[L_12345;L_98765]"
   
  // deleteCustomizing('networkId')
 
- // addCustomizing('networkId', 'L_9876543')
-  //updateCustomizing(key, content)
-  //const output = getCustomizing(key)
-  //const networks = MySqlite.convertToArray(output.content)
-  //networks.forEach( network => console.log(network))
+  //addCustomizing('networks', 'L_9876543;L_123456')
+  updateCustomizing(key, content)
+  const output = getCustomizing(key)
+  const networks = MySqlite.convertToArray(output.content)
+  console.log(networks)
 
   
 
-  readTable(tableName)
+  //readTable(tableName)
   //addRecord(user, params)
- // readDB()
+  //readDB()
   //logger.error('error by insert')
   // getUser(user)
   // updateUser(user, params)

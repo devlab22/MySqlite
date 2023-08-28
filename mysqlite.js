@@ -107,10 +107,12 @@ class MySqlite {
 
     static convertToArray(content, separator=';'){
         
-        content = content.replace('[', '')
-        content = content.replace(']', '')
-        const values = content.split(separator)
-        return values
+        var output = [];
+        content = content.replace('[', '');
+        content = content.replace(']', '');
+        const values = content.split(separator);
+        values.forEach(item => output.push(item.trim()))
+        return output;
     }
 
     static jsonToString(data){
@@ -118,9 +120,7 @@ class MySqlite {
     }
 
     static arrayToString(items, separator=';'){
-        var value = items.toString();
-        value = value.replace(',', separator);
-        return value;
+        return items.join(separator);
     }
 
 }

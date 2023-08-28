@@ -6,8 +6,8 @@ class MyLogger {
 
     constructor(logname = 'app.log', exceptions='exceptions.log', rejections='rejections.log') {
 
-        const myFormat = printf(({ level, message, timestamp, uname }) => {
-            return `${timestamp} :: ${uname} :: ${level} :: ${message}`;
+        const myFormat = printf(({ level, message, timestamp }) => {
+            return `${timestamp} :: ${level} :: ${message}`;
         });
 
 
