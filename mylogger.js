@@ -1,6 +1,6 @@
 const winston = require('winston')
 const { format, transports, createLogger } = require('winston');
-const { combine, timestamp, uname, printf } = format;
+const { combine, timestamp, printf } = format;
 
 class MyLogger {
 
