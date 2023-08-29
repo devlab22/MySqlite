@@ -85,20 +85,18 @@ class MySqlite {
         const conn = this.getConnection();
         const stmt = conn.prepare(statment)
 
-
         try {
             const RunResult = stmt.run( // synchronous
                 ...args
             );
 
+            conn.close();
             return RunResult
         } catch (e) {
+            conn.close();
             const isDuplicate = e.toString().includes('UNIQUE constraint failed');
             throw new Error(e.message)
-        } finally {
-            conn.close();
-        }
-
+        } 
     }
 
     static convertToJson(content){
