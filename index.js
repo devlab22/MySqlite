@@ -1,7 +1,7 @@
 const mySqlite = require('./mysqlite')
 const myLogger = require('./mylogger')
 
-function getLogger(){
+function getLogger() {
   return new myLogger().getLogger();
 }
 
@@ -134,7 +134,7 @@ function addCustomizing(key, content) {
 function main() {
 
   const logger = getLogger()
- // createTable()
+  // createTable()
 
   const tableName = 'customizing'
   const user = 'vengelhard'
