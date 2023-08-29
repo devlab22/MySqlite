@@ -45,20 +45,19 @@ class MySqlite {
     printTable(name) {
 
         const output = this.readTable(name);
-        console.log(`content of table ${name}, count: ${output.length}`)
+        console.log(`content of table "${name}", count: ${output.length}`)
         output.forEach(line => console.log(line))
     }
 
     printTableFields(name) {
 
         const fields = this.readTableFields(name);
-        console.log(`Fields of table ${name}, count: ${fields.length}`)
+        console.log(`Fields of table "${name}", count: ${fields.length}`)
         fields.forEach(line => console.log(line))
     }
 
     execute(statment) {
         const conn = this.getConnection();
-        //conn.exec(statment)
         const stmt = conn.prepare(statment)
         const result = stmt.run()
         conn.close();
@@ -92,7 +91,7 @@ class MySqlite {
                 ...args
             );
 
-            console.log(RunResult)
+            return RunResult
         } catch (e) {
             const isDuplicate = e.toString().includes('UNIQUE constraint failed');
             throw new Error(e.message)
@@ -101,6 +100,29 @@ class MySqlite {
         }
 
     }
+
+    static convertToJson(content){
+        return JSON.parse(content)
+    }
+
+    static convertToArray(content, separator=';'){
+        
+        var output = [];
+        content = content.replace('[', '');
+        content = content.replace(']', '');
+        const values = content.split(separator);
+        values.forEach(item => output.push(item.trim()))
+        return output;
+    }
+
+    static jsonToString(data){
+        return JSON.stringify(data)
+    }
+
+    static arrayToString(items, separator=';'){
+        return items.join(separator);
+    }
+
 }
 
 module.exports = MySqlite
