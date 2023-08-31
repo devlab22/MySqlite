@@ -2,8 +2,23 @@ const Database = require('better-sqlite3');
 
 class MySqlite {
 
-    constructor(path) {
+    constructor(path, tables = []) {
         this.__path = path;
+
+        if (tables.length > 0) {
+
+            const conn = this.getConnection();
+
+            tables.forEach(table => {
+
+                const stmt = conn.prepare(table);
+                stmt.run();
+
+            })
+
+            conn.close();
+        }
+
     }
 
     getConnection() {
@@ -15,12 +30,12 @@ class MySqlite {
     }
 
     readTableFields(name) {
-        var output = []
+        var output = [];
         const conn = this.getConnection();
         const stmt = conn.prepare(`pragma table_info(${name})`);
 
         for (const record of stmt.iterate()) {
-            output.push(record)
+            output.push(record);
         }
 
         conn.close();
@@ -29,12 +44,12 @@ class MySqlite {
 
     readTable(name) {
 
-        var output = []
+        var output = [];
         const conn = this.getConnection();
         const stmt = conn.prepare(`SELECT * FROM ${name}`);
 
         for (const record of stmt.iterate()) {
-            output.push(record)
+            output.push(record);
         }
 
         conn.close();
@@ -45,27 +60,27 @@ class MySqlite {
     printTable(name) {
 
         const output = this.readTable(name);
-        console.log(`content of table "${name}", count: ${output.length}`)
-        output.forEach(line => console.log(line))
+        console.log(`content of table "${name}", count: ${output.length}`);
+        output.forEach(line => console.log(line));
     }
 
     printTableFields(name) {
 
         const fields = this.readTableFields(name);
-        console.log(`Fields of table "${name}", count: ${fields.length}`)
-        fields.forEach(line => console.log(line))
+        console.log(`Fields of table "${name}", count: ${fields.length}`);
+        fields.forEach(line => console.log(line));
     }
 
     execute(statment) {
         const conn = this.getConnection();
-        const stmt = conn.prepare(statment)
-        const result = stmt.run()
+        const stmt = conn.prepare(statment);
+        const result = stmt.run();
         conn.close();
         return result;
     }
 
     selectRecord(statment, ...args) {
-   // select
+        // select
         const conn = this.getConnection();
         const stmt = conn.prepare(statment);
         const result = stmt.get( // synchronous
@@ -73,7 +88,7 @@ class MySqlite {
         );
         conn.close();
 
-        if (result === undefined){
+        if (result === undefined) {
             throw new Error(`record ${args} not found`)
         }
         return result;
@@ -81,9 +96,9 @@ class MySqlite {
     }
 
     statmentRecord(statment, ...args) {
-  // insert, update, delete
+        // insert, update, delete
         const conn = this.getConnection();
-        const stmt = conn.prepare(statment)
+        const stmt = conn.prepare(statment);
 
         try {
             const RunResult = stmt.run( // synchronous
@@ -91,33 +106,33 @@ class MySqlite {
             );
 
             conn.close();
-            return RunResult
+            return RunResult;
         } catch (e) {
             conn.close();
             const isDuplicate = e.toString().includes('UNIQUE constraint failed');
-            throw new Error(e.message)
-        } 
+            throw new Error(e.message);
+        }
     }
 
-    static convertToJson(content){
-        return JSON.parse(content)
+    static convertToJson(content) {
+        return JSON.parse(content);
     }
 
-    static convertToArray(content, separator=';'){
-        
+    static convertToArray(content, separator = ';') {
+
         var output = [];
         content = content.replace('[', '');
         content = content.replace(']', '');
         const values = content.split(separator);
-        values.forEach(item => output.push(item.trim()))
+        values.forEach(item => output.push(item.trim()));
         return output;
     }
 
-    static jsonToString(data){
-        return JSON.stringify(data)
+    static jsonToString(data) {
+        return JSON.stringify(data);
     }
 
-    static arrayToString(items, separator=';'){
+    static arrayToString(items, separator = ';') {
         return items.join(separator);
     }
 

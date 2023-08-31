@@ -2,32 +2,18 @@ const MySqlite = require('./mysqlite');
 const MyLogger = require('./mylogger');
 
 
-function getLogger(){
+function getLogger() {
   return new MyLogger().getLogger();
 }
 
 function createDB() {
-  return new MySqlite('mydatabase.db');
-}
 
-function createTable() {
+  tables = [
+    "create table if not exists customizing('key' varchar primary key not null, 'content' varchar)",
+    "create table if not exists users('uname' varchar primary key not null, 'params' varchar)"
+  ]
 
-  const logger = getLogger()
-
-  try {
-
-    const db = createDB()
-    var result = null
-
-    var statment = "create table if not exists customizing('key' varchar primary key not null, 'content' varchar)"
-    result = db.execute(statment)
-    statment = "CREATE TABLE IF NOT EXISTS users('uname' varchar PRIMARY KEY NOT NULL, 'params' varchar);"
-    result = db.execute(statment)
-  }
-  catch (e) {
-    logger.error(e.message)
-    logger.error(`Error by ${statment}`)
-  }
+  return new MySqlite('mydatabase.db', tables);
 
 }
 
@@ -151,13 +137,13 @@ function addCustomizing(key, content) {
 
 }
 
-function updateCustomizing(key, content){
+function updateCustomizing(key, content) {
   const logger = getLogger()
   const db = createDB();
 
   const statment = `update customizing set content = ? where key = ?`
 
-  if(typeof content !== 'string'){
+  if (typeof content !== 'string') {
     throw new Error(`content is not string`)
   }
 
@@ -172,7 +158,7 @@ function updateCustomizing(key, content){
   }
 }
 
-function deleteCustomizing(key){
+function deleteCustomizing(key) {
 
   const db = createDB();
   const logger = getLogger()
@@ -189,13 +175,13 @@ function deleteCustomizing(key){
   }
 }
 
-function getCustomizing(key){
+function getCustomizing(key) {
   const logger = getLogger();
   const db = createDB();
   const statment = `select * from customizing where key = ?`;
 
   try {
-    const output = db.selectRecord(statment,key);
+    const output = db.selectRecord(statment, key);
     return output;
   }
   catch (e) {
@@ -208,7 +194,6 @@ function getCustomizing(key){
 function main() {
 
   const logger = getLogger()
- // createTable()
 
   const tableName = 'users'
   const user = 'vengelhard'
@@ -218,24 +203,29 @@ function main() {
 
   const key = 'networks';
   content = "[L_12345;L_98765]"
-  
- // deleteCustomizing('networkId')
 
-  //addCustomizing('networks', 'L_9876543;L_123456')
-  //updateCustomizing(key, content)
-  //const output = getCustomizing(key)
-  //const networks = MySqlite.convertToArray(output.content)
-  //console.log(networks)
+  try {
+    // deleteCustomizing('networkId')
 
-  
+    //addCustomizing('networks', 'L_9876543;L_123456')
+    //updateCustomizing(key, content)
+    //const output = getCustomizing(key)
+    //const networks = MySqlite.convertToArray(output.content)
+    //console.log(networks)
 
-  //readTable(tableName)
-  //addRecord(user, params)
-  readDB()
-  //logger.error('error by insert')
-  // getUser(user)
-  // updateUser(user, params)
-  // deleteRecord(user)
+
+
+    //readTable(tableName)
+    //addRecord(user, params)
+    readDB()
+    //logger.error('error by insert')
+    // getUser(user)
+    // updateUser(user, params)
+    // deleteRecord(user)
+  }
+  catch (e) {
+    logger.error(e.message)
+  }
 
 }
 
