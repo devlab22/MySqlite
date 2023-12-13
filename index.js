@@ -3,7 +3,7 @@ const MyLogger = require('./mylogger');
 
 
 function getLogger() {
-  return new MyLogger().getLogger();
+  return MyLogger.getInstance({'debug': true});
 }
 
 function createDB() {
@@ -80,6 +80,9 @@ function readTable(name) {
 
 function readDB(fields = false) {
 
+  const myLogger = getLogger()
+  myLogger.info('start read db')
+
   const db = createDB()
   const masterData = db.readMasterData();
   masterData.forEach(element => {
@@ -93,6 +96,8 @@ function readDB(fields = false) {
     }
 
   })
+
+  myLogger.error('end read db')
 
 }
 
