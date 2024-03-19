@@ -3,7 +3,7 @@ const MyLogger = require('./mylogger');
 
 
 function getLogger() {
-  return MyLogger.getInstance({'debug': true});
+  return MyLogger.getInstance({ 'debug': true });
 }
 
 function createDB() {
@@ -232,6 +232,19 @@ function main() {
     logger.error(e.message)
   }
 
+}
+
+function createDate(addTime=false) {
+
+  const now = new Date()
+
+  var output = `${now.getFullYear()}${(now.getMonth() + 1).toString().padStart(2, '0')}${(now.getDate()).toString().padStart(2, '0')}`
+  const time = `${(now.getHours()).toString().padStart(2, '0')}${(now.getMinutes()).toString().padStart(2, '0')}${(now.getSeconds()).toString().padStart(2, '0')}`
+  if (addTime) {
+    output += time
+  }
+
+  return output
 }
 
 main()
