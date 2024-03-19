@@ -97,7 +97,7 @@ function readDB(fields = false) {
 
   })
 
-  myLogger.error('end read db')
+  myLogger.info('end read db')
 
 }
 

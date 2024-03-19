@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "better-sqlite3": "^8.5.1",
+    "better-sqlite3": "^8.7.0",
     "pkg": "^5.8.1",
     "winston": "^3.10.0"
   },

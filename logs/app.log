@@ -2,3 +2,15 @@
 2023-12-13 13:49:48 :: info :: start read db
 2023-12-13 13:52:38 :: info :: start read db
 2023-12-13 13:52:38 :: error :: end read db
+2024-03-19 10:59:33 :: error :: The module '\\?\D:\VSCode\MySqlite\node_modules\better-sqlite3\build\Release\better_sqlite3.node'
+was compiled against a different Node.js version using
+NODE_MODULE_VERSION 93. This version of Node.js requires
+NODE_MODULE_VERSION 115. Please try re-compiling or re-installing
+the module (for instance, using `npm rebuild` or `npm install`).
+2024-03-19 10:59:33 :: info :: start read db
+2024-03-19 11:00:42 :: info :: start read db
+2024-03-19 11:00:42 :: error :: end read db
+2024-03-19 11:07:26 :: info :: start read db
+2024-03-19 11:07:26 :: error :: end read db
+2024-03-19 11:09:51 :: info :: start read db
+2024-03-19 11:09:51 :: info :: end read db

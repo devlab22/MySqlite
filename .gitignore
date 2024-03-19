@@ -2,3 +2,4 @@
 *linux
 *macos
 *.exe
+logs/*.log
