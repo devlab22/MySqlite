@@ -219,7 +219,9 @@ function main() {
     //console.log(networks)
 
 
-
+    //const db = createDB()
+    //const res = db.readTable('users')
+    //console.log(res)
     //readTable(tableName)
     //addRecord(user, params)
     readDB()
