@@ -1,9 +1,11 @@
 const Database = require('better-sqlite3');
+const MyEvent = require('./myEvent')
 
 class MySqlite {
 
     constructor(path, tables = []) {
         this.__path = path;
+        this.event = new MyEvent()
 
         if (tables.length > 0) {
 
@@ -26,6 +28,7 @@ class MySqlite {
     }
 
     readMasterData() {
+        this.event.submit('readMasterData', { name: 'readMasterData', object: 'mySqlite'})
         return this.readTable('sqlite_master');
     }
 

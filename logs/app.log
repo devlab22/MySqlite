@@ -28,3 +28,45 @@ the module (for instance, using `npm rebuild` or `npm install`).
 2024-03-20 13:33:01 :: info :: end read db
 2024-03-20 13:35:09 :: info :: start read db
 2024-03-20 13:35:09 :: info :: end read db
+2024-04-29 14:02:12 :: error :: The module '\\?\D:\VSC\MySqlite\node_modules\better-sqlite3\build\Release\better_sqlite3.node'
+was compiled against a different Node.js version using
+NODE_MODULE_VERSION 115. This version of Node.js requires
+NODE_MODULE_VERSION 108. Please try re-compiling or re-installing
+the module (for instance, using `npm rebuild` or `npm install`).
+2024-04-29 14:02:12 :: info :: start read db
+2024-04-29 14:03:22 :: error :: The module '\\?\D:\VSC\MySqlite\node_modules\better-sqlite3\build\Release\better_sqlite3.node'
+was compiled against a different Node.js version using
+NODE_MODULE_VERSION 115. This version of Node.js requires
+NODE_MODULE_VERSION 108. Please try re-compiling or re-installing
+the module (for instance, using `npm rebuild` or `npm install`).
+2024-04-29 14:03:22 :: info :: start read db
+2024-04-29 14:03:49 :: error :: The module '\\?\D:\VSC\MySqlite\node_modules\better-sqlite3\build\Release\better_sqlite3.node'
+was compiled against a different Node.js version using
+NODE_MODULE_VERSION 115. This version of Node.js requires
+NODE_MODULE_VERSION 108. Please try re-compiling or re-installing
+the module (for instance, using `npm rebuild` or `npm install`).
+2024-04-29 14:03:49 :: info :: start read db
+2024-04-29 14:04:33 :: info :: start read db
+2024-04-29 14:04:33 :: info :: end read db
+2024-04-29 14:06:51 :: info :: start read db
+2024-04-29 14:06:51 :: info :: end read db
+2024-04-29 14:07:43 :: info :: start read db
+2024-04-29 14:07:43 :: info :: end read db
+2024-04-29 14:08:23 :: info :: start read db
+2024-04-29 14:08:23 :: info :: end read db
+2024-04-29 14:08:59 :: info :: start read db
+2024-04-29 14:08:59 :: info :: end read db
+2024-04-29 14:09:23 :: info :: start read db
+2024-04-29 14:09:23 :: info :: end read db
+2024-04-29 14:10:05 :: info :: start read db
+2024-04-29 14:10:05 :: info :: end read db
+2024-04-29 14:10:16 :: info :: start read db
+2024-04-29 14:10:16 :: info :: end read db
+2024-04-29 14:57:36 :: info :: start read db
+2024-04-29 14:57:36 :: info :: end read db
+2024-04-29 15:04:58 :: info :: start read db
+2024-04-29 15:04:58 :: info :: end read db
+2024-04-29 15:05:14 :: info :: start read db
+2024-04-29 15:05:14 :: info :: end read db
+2024-04-29 15:07:14 :: info :: start read db
+2024-04-29 15:07:14 :: info :: end read db

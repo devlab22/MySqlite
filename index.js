@@ -1,5 +1,6 @@
 const MySqlite = require('./mysqlite');
 const MyLogger = require('./mylogger');
+const MyEvent = require('./myEvent')
 
 
 function getLogger() {
@@ -84,6 +85,8 @@ function readDB(fields = false) {
   myLogger.info('start read db')
 
   const db = createDB()
+  db.event.addEvent('readMasterData', onAdd)
+  console.log(db.event.isEventExists('readMasterData', onAdd))
   const masterData = db.readMasterData();
   masterData.forEach(element => {
     if (element['type'] === 'table') {
@@ -249,4 +252,23 @@ function createDate(addTime=false) {
   return output
 }
 
+function onAdd(event){
+  console.log(event)
+}
+
+function mainEvent(){
+
+  const event = new MyEvent()
+
+  event.addEvent('onAdd', onAdd)
+
+  console.log(event.events)
+
+  return event;
+}
+
 main()
+
+
+
+//mainEvent()
